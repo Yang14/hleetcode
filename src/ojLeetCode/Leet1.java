@@ -88,10 +88,12 @@ public class Leet1 {
             if ((numbers[i] + numbers[i + 1]) == target) {
                 r = index(a,numbers[i],numbers[i+1]);
 //                System.out.println(r[0] + "-- " + r[1]);
+//                System.out.println(r[0] + "-- " + r[1]);
                 break;
             }
             i++;
         }
+
         return r;
     }
 
