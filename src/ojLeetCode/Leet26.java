@@ -6,7 +6,7 @@ package ojLeetCode;
 public class Leet26 {
 
     public static void main(String[] args) {
-        int[] nums = {1,1,1, 2,3,3,4,4,5};
+        int[] nums = {0,0,0,0,3};
         int r = removeDuplicates(nums);
         for (int e : nums) {
             System.out.print(e + " ");
@@ -15,24 +15,33 @@ public class Leet26 {
     }
 
     public static int removeDuplicates(int[] a) {
-        if (a.length <= 1) return a.length;
-        int p1, p2=0;
-        for (p1 = 1; p1 < a.length; ++p1) {
-            if (a[0] == a[p1])
-                break;
+        if (a == null || a.length < 1) return 0;
+        int result = 0;
+        int na = a[0] - 1;
+        int x = a[0];
+        for (int i = 1; i < a.length; ++i) {
+            if (a[i] != x) {
+                x = a[i];
+            } else{
+                a[i] = na;
+                result++;
+            }
         }
-        if(a[0] == a[1]) p1 = 1;
-        else p1 = 2;
-        p2 = p1;
-        System.out.println("p1" + p1);
+        int p1 = 0, p2 = 1;
         while (p1 < a.length && p2 < a.length) {
-            if (a[p1] != a[p2]) {
-                a[p1] = a[p2];
+            if (a[p1] != na) {
                 p1++;
-                p2++;
-            } else
-                p2++;
+            } else {
+                p2 = p2 > p1 ? p2 : p1+1;
+                while (p2 < a.length && a[p2] == na) p2++;
+//                System.out.println("p1:" + p1 +" p2: " + p2);
+                if (p2 < a.length) {
+                    a[p1] = a[p2];
+                    a[p2] = na;
+                    p1++;
+                }
+            }
         }
-        return p1;
+        return a.length - result;
     }
 }
