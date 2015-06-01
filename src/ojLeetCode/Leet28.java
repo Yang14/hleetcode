@@ -5,7 +5,7 @@ package ojLeetCode;
  */
 public class Leet28 {
     public static void main(String[] args) {
-        System.out.println("index is : " + strStr("", ""));
+        System.out.println("index is : " + strStr3("abcabb", "abb"));
     }
 
     public static int[] getNext(String m) {
@@ -65,5 +65,9 @@ public class Leet28 {
             }
         }
         return j >= mc.length ? i - j : -1;
+    }
+
+    public static int strStr3(String t,String m){
+        return t.indexOf(m);
     }
 }
