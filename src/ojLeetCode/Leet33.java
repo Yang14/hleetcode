@@ -22,6 +22,7 @@ public class Leet33 {
         }
         return -1;
     }
+
     public static int search(int[] nums, int target) {
         int divide = -1;
         int r = -1;
