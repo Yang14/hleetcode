@@ -1,48 +1,18 @@
 package ojLeetCode;
 
-<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.Map;
-=======
 import java.util.*;
->>>>>>> d76c5311cfd65c2b66d8e76032ce56d9bf20ef95
 
 /**
  * Created by Mryang on 15-6-4.
  */
 public class Leet60 {
     public static void main(String[] args) {
-<<<<<<< HEAD
 
         String r = getPermutation(3, 6);
 
         System.out.println("% th per is : " + r);
-    }
-
-    public static String getPermutation(int n, int k) {
-          return kThPermutationWithMath(n,k);
-    }
-
-    public static String kThPermutationWithMath(int n, int k) {
-        int divide = fac(n-1);
-
-        int[] num = new int[n];
-        for (int i = 1; i <= n; ++i) num[i - 1] = i;
-
-        String r = "";
-        int k1 = k;
-        while (n > 0 ){
-            int count = fac(n-1);
-            int a = (k1-1) / count;
-            r+=num[a];
-            n--;
-            k1 = k1 % count;
-=======
-        String r;
-        for (int i = 1; i < 7; ++i) {
-            r = getPermutation(4, i);
-            System.out.println("per: " + r);
-        }
     }
 
     public static String getPermutation(int n, int k) {
@@ -72,44 +42,23 @@ public class Leet60 {
             int idx = k / div;
             r += nums.get(idx);
             nums.remove(idx);
+
             k = k % div;
-            if (k == 0) {   //后面的数据没有交换过，直接加入结果集
+
+            if (k == 0) { //后面的数据没有交换过，直接加入结果集
                 for (int e : nums)
                     r += e;
                 break;
             }
+
+            div = div / (n - 1); //技巧：直接利用n!的性质，(n-1)! = n!/(n-1),避免了重复计算fac.
             n--;
-            div = div / n;  //技巧：直接利用n!的性质，(n-1)! = n!/(n-1),避免了重复计算fac.
->>>>>>> d76c5311cfd65c2b66d8e76032ce56d9bf20ef95
         }
         return r;
     }
 
-<<<<<<< HEAD
-    public static int fac(int n){
-        return n<=1? 1 : n* fac(n-1);
-    }
-
-    public static String permutation2(StringBuilder sofa, StringBuilder remain, int k, Map<String, Integer> hm) {
-        if (remain.length() == 0) {
-            if (hm.get("count") == k)
-                return sofa.toString();
-            hm.put("count", hm.get("count") + 1);
-            return null;
-        }
-        for (int i = 0; i < remain.length(); ++i) {
-            StringBuilder sofa2 = new StringBuilder(sofa).append(remain.charAt(i));
-            StringBuilder remain2 = new StringBuilder(remain);
-            remain2.deleteCharAt(i);
-            String result = permutation2(sofa2, remain2, k, hm);
-            if (result != null)
-                return result;
-        }
-        return null;
-=======
     public static int fac(int n) {
         return n <= 1 ? 1 : n * fac(n - 1);
->>>>>>> d76c5311cfd65c2b66d8e76032ce56d9bf20ef95
     }
 
 }
