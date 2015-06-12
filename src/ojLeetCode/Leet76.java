@@ -1,5 +1,8 @@
 package ojLeetCode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Mryang on 15-6-4.
  */
@@ -14,54 +17,45 @@ public class Leet76 {
     public static String minWindow(String s, String t) {
         String r = "";
 
-        int[] shm = new int[256];
-        int[] thm = new int[256];
+        Map<Character, Integer> hm = new HashMap<Character, Integer>();
         char[] cs = s.toCharArray();
         char[] ct = t.toCharArray();
 
-        for (char e : cs)
-            shm[e]++;
         for (char e : ct)
-            thm[e]++;
-        for (char e : ct) {
-            if (shm[e] < thm[e])
-                return "";
+            if (hm.get(e) == null) hm.put(e, 1);
+            else hm.put(e, hm.get(e) + 1);
+
+        int beg = 0, end = 0, max = -1, sum = ct.length;
+
+        int i = 0, j = 0;
+        while (j < cs.length) {
+            System.out.println(j);
+            if (hm.get(cs[j]) != null && hm.get(cs[j]) >= 0) {
+                if (sum == 0 && (j - i) > max) {
+                    max = j - i;
+                    beg = i;
+                    end = j;
+                } else {
+                    hm.put(cs[j], hm.get(cs[j]) - 1);
+                    sum--;
+                }
+            } else {
+                while (i <= j) {
+                    if (hm.get(cs[i]) != null && hm.get(cs[i]) == 0) {
+                        sum++;
+                        hm.put(cs[j], hm.get(cs[j]) + 1);
+                        j--;
+                        break;
+                    }
+                    i++;
+                }
+            }
+            j++;
+
         }
 
-        int beg = 0, end = cs.length - 1;
 
-        /*while (beg < end) {
-            if (thm[cs[beg]] == 0){
-                beg++;
-            }else if (thm[cs[end]] == 0){
-                end--;
-            }
-            if (thm[cs[beg]] != 0 && shm[cs[beg]] > 1) {
-                shm[cs[beg]]--;
-                beg++;
-            }
-            else if (thm[cs[end]] != 0 && shm[cs[end]] > 1){
-                shm[cs[end]]--;
-                end--;
-            }else
-                break;
-        }*/
-        while (beg < end) {
-            if (thm[cs[beg]] != 0) {
-                if (--shm[cs[beg]] < thm[cs[beg]])
-                    break;
-            }
-            beg++;
-        }
-        while (beg < end) {
-            if (thm[cs[end]] != 0) {
-                if (--shm[cs[end]] < thm[cs[end]])
-                    break;
-            }
-            end--;
-        }
-        System.out.println(beg +" " + end);
-        return s.substring(beg,end + 1);
+        return s.substring(beg, end + 1);
     }
 
 }
