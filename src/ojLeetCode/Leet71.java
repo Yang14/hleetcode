@@ -9,6 +9,14 @@ public class Leet71 {
     public static void main(String[] args) {
         String r = simplifyPath("/a/./b///../c/../././../d/..//../e/./f/./g/././//.//h///././/..///");
         System.out.println("simplify path: " + r);
+        printNum(100);
+    }
+
+    public static void printNum(int n){
+        if (n > 0){
+            printNum(n-1);
+            System.out.print(n +" ");
+        }
     }
 
     public static String simplifyPath(String path) {
