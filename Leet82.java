@@ -15,7 +15,7 @@ public class Leet82 {
         ListNode l6 = new ListNode(4);
         ListNode l7 = new ListNode(8);
         l1.next = l2;
-//        l2.next = l3;
+        l2.next = l3;
         l3.next = l4;
         l4.next = l5;
         l5.next = l6;
