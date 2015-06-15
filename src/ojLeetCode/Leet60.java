@@ -1,5 +1,7 @@
 package ojLeetCode;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.*;
 
 /**
@@ -7,11 +9,10 @@ import java.util.*;
  */
 public class Leet60 {
     public static void main(String[] args) {
-        String r;
-        for (int i = 1; i < 7; ++i) {
-            r = getPermutation(4, i);
-            System.out.println("per: " + r);
-        }
+
+        String r = getPermutation(3, 6);
+
+        System.out.println("% th per is : " + r);
     }
 
     public static String getPermutation(int n, int k) {
@@ -41,14 +42,17 @@ public class Leet60 {
             int idx = k / div;
             r += nums.get(idx);
             nums.remove(idx);
+
             k = k % div;
-            if (k == 0) {   //后面的数据没有交换过，直接加入结果集
+
+            if (k == 0) { //后面的数据没有交换过，直接加入结果集
                 for (int e : nums)
                     r += e;
                 break;
             }
+
+            div = div / (n - 1); //技巧：直接利用n!的性质，(n-1)! = n!/(n-1),避免了重复计算fac.
             n--;
-            div = div / n;  //技巧：直接利用n!的性质，(n-1)! = n!/(n-1),避免了重复计算fac.
         }
         return r;
     }
